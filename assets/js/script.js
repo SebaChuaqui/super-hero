@@ -29,7 +29,7 @@ $(document).ready(function () {
                     console.log(data);
 
                     $('#containerResultados').empty();
-                    $('#chartContainer')
+                    $('#chartContainer').empty();
 
                     $('#containerResultados').append(`<div class="card d-flex flex-row me-5" style="width=100%"
                                                         <div style="width=40%;">
@@ -51,7 +51,7 @@ $(document).ready(function () {
                                                 </div>
                     `);
 
-                    let opcion = {
+                    let options = {
                         exportEnabled: true,
                         animationEnabled: true,
                         title: {
@@ -76,11 +76,13 @@ $(document).ready(function () {
                         }]
                     };
 
-                }
-
-            }
-            )
+                    $('#chartContainer').CanvasJSChart(options);
+                },
+                error: function (error) {
+                    alert('Haz cometido un error... Inténtalo otra vez');
+                },
+            });
         }
-
+        Programa();
     });
 });
