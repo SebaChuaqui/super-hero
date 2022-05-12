@@ -55,9 +55,9 @@ $(document).ready(function () {
                         exportEnabled: true,
                         animationEnabled: true,
                         title:{
-                            text:`Estadísticas Poder ${data.name}`
+                            text:`Estadísticas Poder ${data.name} :`
                         },
-                        
+
                     }
 
                 }
