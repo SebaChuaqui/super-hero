@@ -54,11 +54,27 @@ $(document).ready(function () {
                     let opcion = {
                         exportEnabled: true,
                         animationEnabled: true,
-                        title:{
-                            text:`Estadísticas Poder ${data.name} :`
+                        title: {
+                            text: `Estadísticas Poder ${data.name} :`
                         },
-
-                    }
+                        legend: {
+                            cursor: "pointer"
+                        },
+                        data: [{
+                            type: "pie",
+                            showInLegend: true,
+                            toolTipContent: "{name}: <strong>{y}%</strong>",
+                            indexLabel: "{name} - {y}",
+                            dataPoints: [
+                                { y: data.powerstats.intelligence, name: "intelligence" },
+                                { y: data.powerstats.strength, name: "strength" },
+                                { y: data.powerstats.speed, name: "speed" },
+                                { y: data.powerstats.durability, name: "durability" },
+                                { y: data.powerstats.power, name: "power" },
+                                { y: data.powerstats.combat, name: "combat" }
+                            ]
+                        }]
+                    };
 
                 }
 
