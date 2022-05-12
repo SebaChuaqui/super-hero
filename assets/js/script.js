@@ -29,7 +29,7 @@ $(document).ready(function () {
                     console.log(data);
 
                     $('#containerResultados').empty();
-                    $('#chartContainer').empty();
+                    $("#chartContainer").empty();
 
                     $('#containerResultados').append(`<div class="card d-flex flex-row me-5" style="width=100%"
                                                         <div style="width=40%;">
@@ -51,14 +51,14 @@ $(document).ready(function () {
                                                 </div>
                     `);
 
-                    let options = {
+                    let opciones = {
                         exportEnabled: true,
                         animationEnabled: true,
                         title: {
-                            text: `Estadísticas Poder ${data.name} :`
+                            text: `Estadísticas Poder: ${data.name}`
                         },
                         legend: {
-                            cursor: "pointer"
+                            cursor: "pointer",
                         },
                         data: [{
                             type: "pie",
@@ -66,17 +66,17 @@ $(document).ready(function () {
                             toolTipContent: "{name}: <strong>{y}%</strong>",
                             indexLabel: "{name} - {y}",
                             dataPoints: [
-                                { y: data.powerstats.intelligence, name: "intelligence" },
-                                { y: data.powerstats.strength, name: "strength" },
-                                { y: data.powerstats.speed, name: "speed" },
-                                { y: data.powerstats.durability, name: "durability" },
-                                { y: data.powerstats.power, name: "power" },
-                                { y: data.powerstats.combat, name: "combat" }
+                                { y: data.powerstats.intelligence, name: "inteligencia" },
+                                { y: data.powerstats.strength, name: "fuerza" },
+                                { y: data.powerstats.speed, name: "velocidad" },
+                                { y: data.powerstats.durability, name: "durabilidad" },
+                                { y: data.powerstats.power, name: "poder" },
+                                { y: data.powerstats.combat, name: "combate" }
                             ]
                         }]
                     };
 
-                    $('#chartContainer').CanvasJSChart(options);
+                    $("#chartContainer").CanvasJSChart(opciones);
                 },
                 error: function (error) {
                     alert('Haz cometido un error... Inténtalo otra vez');
