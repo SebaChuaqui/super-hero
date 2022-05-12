@@ -19,5 +19,52 @@ $(document).ready(function () {
             }
         }
 
+        function Buscar() {
+
+            $.ajax({
+                type: "GET",
+                url: `https://superheroapi.com/api.php/1501982276808516/${idHero}`,
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+
+                    $('#containerResultados').empty();
+                    $('#chartContainer')
+
+                    $('#containerResultados').append(`<div class="card d-flex flex-row me-5" style="width=100%"
+                                                        <div style="width=40%;">
+                                                            <img src="${data.image.url}" class="card-img-top" alt="imgHero" style="object-fit: cover;width: 100%;height:100%;">
+                                                        </div>
+                                                        <div style="width:60%;">
+                                                        <div class="card-body">
+                                                            <h3 class="card-title"><strong>Nombre:</strong> ${data.name}</h3>
+                                                        </div>
+                                                        <ul class="list-group list-group-flush">
+                                                            <li class="list-group-item"><strong>Conexiones:</strong> ${data.connections['group-affiliation']}</li>
+                                                            <li class="list-group-item"><strong>Ocupación:</strong> ${data.work.occupation}</li>
+                                                            <li class="list-group-item"><strong>Primera Aparición:</strong> ${data.biography['first-appearance']}</li>
+                                                            <li class="list-group-item"><strong>Altura:</strong> ${data.appearance.height}</li>
+                                                            <li class="list-group-item"><strong>Peso:</strong> ${data.appearance.weight}</li>
+                                                            <li class="list-group-item"><strong>Alias:</strong> ${data.biography.aliases}</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                    `);
+
+                    let opcion = {
+                        exportEnabled: true,
+                        animationEnabled: true,
+                        title:{
+                            text:`Estadísticas Poder ${data.name}`
+                        },
+                        
+                    }
+
+                }
+
+            }
+            )
+        }
+
     });
 });
