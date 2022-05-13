@@ -31,15 +31,14 @@ $(document).ready(function () {
                     $('#containerResultados').empty();
                     $("#chartContainer").empty();
 
+                    $("#super").text("SuperHeroe Encontrado");
+
                     $('#containerResultados').append(`<div class="card d-flex flex-row me-5" style="width=100%"
                                                         <div style="width=40%;">
-                                                            <img src="${data.image.url}" class="card-img-top" alt="imgHero" style="object-fit: cover;width: 100%;height:100%;">
-                                                        </div>
-                                                        <div style="width:60%;">
-                                                        <div class="card-body">
-                                                            <h3 class="card-title"><strong>Nombre:</strong> ${data.name}</h3>
-                                                        </div>
-                                                        <ul class="list-group list-group-flush">
+                                                            <img src="${data.image.url}" class="card-img-top" alt="imgHero" style="object-fit: cover;width: 30%;height:80%;">
+                                                            <div class="card-body">
+                                                            <h6 class="card-title m-3"><strong>Nombre:</strong> ${data.name}</h6>
+                                                            <ul class="list-group list-group-flush">
                                                             <li class="list-group-item"><strong>Conexiones:</strong> ${data.connections['group-affiliation']}</li>
                                                             <li class="list-group-item"><strong>Ocupación:</strong> ${data.work.occupation}</li>
                                                             <li class="list-group-item"><strong>Primera Aparición:</strong> ${data.biography['first-appearance']}</li>
@@ -47,6 +46,11 @@ $(document).ready(function () {
                                                             <li class="list-group-item"><strong>Peso:</strong> ${data.appearance.weight}</li>
                                                             <li class="list-group-item"><strong>Alias:</strong> ${data.biography.aliases}</li>
                                                         </ul>
+                                                        </div>
+                                                        </div>
+                                                        <div style="width:60%;">
+                                                        
+
                                                     </div>
                                                 </div>
                     `);
@@ -66,7 +70,7 @@ $(document).ready(function () {
                             toolTipContent: "{name}: <strong>{y}%</strong>",
                             indexLabel: "{name} - {y}",
                             dataPoints: [
-                                { y: data.powerstats.intelligence, name: "inteligencia" },
+                                { y: data.powerstats.intelligence == "null" ? 0 : data.powerstats.intelligence, name: "inteligencia" },
                                 { y: data.powerstats.strength, name: "fuerza" },
                                 { y: data.powerstats.speed, name: "velocidad" },
                                 { y: data.powerstats.durability, name: "durabilidad" },
@@ -75,8 +79,13 @@ $(document).ready(function () {
                             ]
                         }]
                     };
+                    if (powercheck(data.powerstats)) {
+                        $("#chartContainer").CanvasJSChart(opciones);
+                    }
+                    else {
+                        $("#chartContainer").text("Lo Sentimos: NO SE PUEDE GRAFICAR");
+                    }
 
-                    $("#chartContainer").CanvasJSChart(opciones);
                 },
                 error: function (error) {
                     alert('Haz cometido un error... Inténtalo otra vez');
@@ -86,3 +95,13 @@ $(document).ready(function () {
         Programa();
     });
 });
+
+function powercheck(powerstat) {
+    for (key in powerstat) {
+        if (powerstat[key] == "null") {
+            return false
+        }
+    }
+
+    return true
+};
